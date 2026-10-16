@@ -97,7 +97,7 @@
 .contact-content { text-align: center; max-width: 600px; margin: 0 auto; }
 .contact-text { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 48px; }
 .contact-links { display: flex; flex-direction: column; gap: 16px; }
-.contact-card { display: flex; align-items: center; gap: 20px; padding: 24px 28px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); transition: var(--transition); text-align: left; }
+.contact-card { display: flex; align-items: center; gap: 20px; padding: 24px 28px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); transition: var(--transition); text-align: left; width: 100%; cursor: pointer; color: inherit; }
 .contact-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); transform: translateX(4px); }
 .contact-card-icon { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: var(--accent-subtle); border-radius: var(--radius); color: var(--accent); flex-shrink: 0; }
 .contact-card-info { flex: 1; }
@@ -105,6 +105,14 @@
 .contact-card-value { display: block; font-size: 1rem; font-weight: 600; color: var(--text); }
 .contact-card-arrow { color: var(--text-muted); transition: var(--transition); flex-shrink: 0; }
 .contact-card:hover .contact-card-arrow { color: var(--accent); transform: translate(4px, -4px); }
+.contact-card-action { display: flex; align-items: center; gap: 8px; color: var(--text-muted); transition: var(--transition); flex-shrink: 0; }
+.contact-card:hover .contact-card-action { color: var(--accent); }
+.contact-action-badge { font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: var(--radius-sm); background: var(--accent-subtle); color: var(--text-secondary); transition: var(--transition); white-space: nowrap; }
+.contact-card:hover .contact-action-badge { background: var(--accent-glow); color: var(--accent); }
+.contact-action-icon { transition: transform var(--transition-fast), color var(--transition); }
+.contact-card.copied { border-color: rgba(34, 197, 94, 0.4); background: var(--bg-card-hover); }
+.contact-card.copied .contact-action-badge { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+.contact-card.copied .contact-action-icon { color: #22c55e; transform: scale(1.15); }
 
 /* Footer */
 .footer { padding: 48px 0; border-top: 1px solid var(--border); }

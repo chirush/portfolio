@@ -71,4 +71,54 @@ document.addEventListener('DOMContentLoaded', () => {
       text.textContent = card.classList.contains('expanded') ? 'Show Less' : 'Read More';
     });
   });
+
+  // Contact card copy action (e.g. Discord username)
+  document.querySelectorAll('.contact-card-copy').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.getAttribute('data-copy');
+      if (!text) return;
+
+      let success = false;
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+          success = true;
+        } catch (err) {
+          success = false;
+        }
+      }
+
+      if (!success) {
+        const tempInput = document.createElement('textarea');
+        tempInput.value = text;
+        tempInput.style.position = 'fixed';
+        tempInput.style.left = '-9999px';
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        try {
+          success = document.execCommand('copy');
+        } catch (err) {
+          success = false;
+        }
+        document.body.removeChild(tempInput);
+      }
+
+      const badge = btn.querySelector('.contact-action-badge');
+      const icon = btn.querySelector('.contact-action-icon');
+      const originalBadgeText = badge ? badge.textContent : 'Copy';
+      const originalIconSvg = icon ? icon.innerHTML : '';
+
+      btn.classList.add('copied');
+      if (badge) badge.textContent = 'Copied!';
+      if (icon) {
+        icon.innerHTML = '<polyline points="20 6 9 17 4 12"></polyline>';
+      }
+
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        if (badge) badge.textContent = originalBadgeText;
+        if (icon) icon.innerHTML = originalIconSvg;
+      }, 2000);
+    });
+  });
 });
